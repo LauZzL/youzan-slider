@@ -61,6 +61,7 @@ class YouZan:
         response = requests.post(url, json=payload, headers=self.headers)
         utils.response_assert(response)
         jdata = response.json()
+        assert jdata['data']['success'] is True, f'captcha check failed, error message is {jdata["msg"]}'
         jdata['data']['token'] = self.token
         return json.dumps(jdata)
 
